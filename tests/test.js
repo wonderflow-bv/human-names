@@ -61,6 +61,9 @@ test(function (t) {
 	t.assert(humanNames.isPersonName("Corey") == true);
 	t.assert(humanNames.isPersonName("Suzanna") == true);
 	// t.assert(humanNames.isPersonName("Marko") == true);
+});
 
+test(function (t) {
+	t.assert(humanNames.parseNames("☎ ☎ Shirley TEL ☎ ☎ \n\n☎ ☎ 860 995 3542 ☎ ☎ \n** TEXT MESSAGE ONLY **\nHi, honey. Just send your address if you want me come to you now.\n\nOutcall special:\n\n$160 For 1 hour.\n$320 For 3 hour.\n$600 For Overnight.\n\n** NO BLOCKED CALLS ** \n** SERIOUS INQUIRIES ONLY ** \n\n** NO RAPIST **") == true);
 	t.end();
 });

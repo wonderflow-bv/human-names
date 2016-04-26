@@ -1,23 +1,26 @@
 'use strict';
+
+var compendium = require('compendium-js');
+
 var uniqueRandomArray = require('unique-random-array');
-var femaleHumanNamesEn = require('./female-human-names-en.json');
-var maleHumanNamesEn = require('./male-human-names-en.json');
+var femaleHumanNamesEn = require('../data/female-human-names-en.json');
+var maleHumanNamesEn = require('../data/male-human-names-en.json');
 var allHumanNamesEn = [];
 
-var femaleHumanNamesIt = require('./female-human-names-it.json');
-var maleHumanNamesIt = require('./male-human-names-it.json');
+var femaleHumanNamesIt = require('../data/female-human-names-it.json');
+var maleHumanNamesIt = require('../data/male-human-names-it.json');
 var allHumanNamesIt = [];
 
-var femaleHumanNamesFr = require('./female-human-names-fr.json');
-var maleHumanNamesFr = require('./male-human-names-fr.json');
+var femaleHumanNamesFr = require('../data/female-human-names-fr.json');
+var maleHumanNamesFr = require('../data/male-human-names-fr.json');
 var allHumanNamesFr = [];
 
-var femaleHumanNamesDe = require('./female-human-names-de.json');
-var maleHumanNamesDe = require('./male-human-names-de.json');
+var femaleHumanNamesDe = require('../data/female-human-names-de.json');
+var maleHumanNamesDe = require('../data/male-human-names-de.json');
 var allHumanNamesDe = [];
 
-var femaleHumanNamesEs = require('./female-human-names-es.json');
-var maleHumanNamesEs = require('./male-human-names-es.json');
+var femaleHumanNamesEs = require('../data/female-human-names-es.json');
+var maleHumanNamesEs = require('../data/male-human-names-es.json');
 var allHumanNamesEs = [];
 
 
@@ -30,10 +33,10 @@ var allHumanNamesDe = (femaleHumanNamesDe).concat(maleHumanNamesDe)
 var allHumanNamesEs = (femaleHumanNamesEs).concat(maleHumanNamesEs)
 
 allNames = allHumanNamesEn
-	.concat(allHumanNamesIt)
-	.concat(allHumanNamesFr)
-	.concat(allHumanNamesDe)
-	.concat(allHumanNamesEs);
+    .concat(allHumanNamesIt)
+    .concat(allHumanNamesFr)
+    .concat(allHumanNamesDe)
+    .concat(allHumanNamesEs);
 
 // femaleHumanNamesEn.forEach(function (el, i) {
 // 	if ((maleHumanNamesEn[i] != undefined) && (maleHumanNamesEn[i] != 'undefined')) {
@@ -112,11 +115,49 @@ exports.allRandomEs = uniqueRandomArray(allHumanNamesEs);
  */
 var isPersonName = function (name) {
 
-	var matchIndex = allNames.findIndex(function (x, index) {
-		return new RegExp(name, "gi").test(x)
-	})
+    var matchIndex = allNames.findIndex(function (x, index) {
+        return new RegExp(name, "gi").test(x)
+    })
 
-	return matchIndex != -1;
+    return matchIndex != -1;
 }
 
+
+let parseNames = function (text) {
+
+    let parsed = compendium.analyse(text)
+
+    // Normalise entity tokens into a single array
+    let entities = []
+
+    parsed.forEach(x => {
+        entities = entities.concat(x.entities)
+    })
+
+    // Filter entities by known people names
+    entities = entities.filter(x => {
+        return isPersonName(x)
+    })
+
+    entities = entities.map(x => {
+        return {
+            raw: x.raw,
+            norm: x.norm
+        }
+    })
+
+    printJson(entities)
+
+    if (entities.length > 0) {
+        return entities[0]
+    }
+
+    return ""
+}
+
+function printJson(what) {
+    return console.log(JSON.stringify(what, null, '  '));
+};
+
 exports.isPersonName = isPersonName;
+exports.parseNames = parseNames;
