@@ -3,14 +3,14 @@
   "version": "1.0.8",
   "description": "Get popular human names",
   "license": "MIT",
-  "repository": "AlessandroMinoccheri/human-names",
+  "repository": "dcworldwide/human-names",
   "bin": {
     "human-names": "cli.js"
   },
   "author": {
-    "name": "Alessandro Minoccheri",
-    "email": "alessandro.minoccheri@gmail.com",
-    "url": "alessandrominoccheri.com"
+    "name": "Danijel",
+    "email": "",
+    "url": "danijel.com"
   },
   "engines": {
     "node": ">=0.10.0"

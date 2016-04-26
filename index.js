@@ -20,35 +20,50 @@ var femaleHumanNamesEs = require('./female-human-names-es.json');
 var maleHumanNamesEs = require('./male-human-names-es.json');
 var allHumanNamesEs = [];
 
-femaleHumanNamesEn.forEach(function (el, i) {
-    if((maleHumanNamesEn[i] != undefined) && (maleHumanNamesEn[i] != 'undefined')){
-        allHumanNamesEn.push(el, maleHumanNamesEn[i]);
-    }
-});
 
-femaleHumanNamesIt.forEach(function (el, i) {
-    if((maleHumanNamesIt[i] != undefined) && (maleHumanNamesIt[i] != 'undefined')){
-        allHumanNamesIt.push(el, maleHumanNamesIt[i]);
-    }
-});
+var allNames = [];
 
-femaleHumanNamesFr.forEach(function (el, i) {
-    if((maleHumanNamesFr[i] != undefined) && (maleHumanNamesFr[i] != 'undefined')){
-        allHumanNamesFr.push(el, maleHumanNamesFr[i]);
-    }
-});
+var allHumanNamesEn = (femaleHumanNamesEn).concat(maleHumanNamesEn)
+var allHumanNamesIt = (femaleHumanNamesIt).concat(maleHumanNamesIt)
+var allHumanNamesFr = (femaleHumanNamesFr).concat(maleHumanNamesFr)
+var allHumanNamesDe = (femaleHumanNamesDe).concat(maleHumanNamesDe)
+var allHumanNamesEs = (femaleHumanNamesEs).concat(maleHumanNamesEs)
 
-femaleHumanNamesDe.forEach(function (el, i) {
-    if((maleHumanNamesDe[i] != undefined) && (maleHumanNamesDe[i] != 'undefined')){
-        allHumanNamesDe.push(el, maleHumanNamesDe[i]);
-    }
-});
+allNames = allHumanNamesEn
+	.concat(allHumanNamesIt)
+	.concat(allHumanNamesFr)
+	.concat(allHumanNamesDe)
+	.concat(allHumanNamesEs);
 
-femaleHumanNamesEs.forEach(function (el, i) {
-    if((maleHumanNamesEs[i] != undefined) && (maleHumanNamesEs[i] != 'undefined')){
-        allHumanNamesEs.push(el, maleHumanNamesEs[i]);
-    }
-});
+// femaleHumanNamesEn.forEach(function (el, i) {
+// 	if ((maleHumanNamesEn[i] != undefined) && (maleHumanNamesEn[i] != 'undefined')) {
+// 		allHumanNamesEn.push(el, maleHumanNamesEn[i]);
+// 	}
+// });
+//
+// femaleHumanNamesIt.forEach(function (el, i) {
+// 	if ((maleHumanNamesIt[i] != undefined) && (maleHumanNamesIt[i] != 'undefined')) {
+// 		allHumanNamesIt.push(el, maleHumanNamesIt[i]);
+// 	}
+// });
+//
+// femaleHumanNamesFr.forEach(function (el, i) {
+// 	if ((maleHumanNamesFr[i] != undefined) && (maleHumanNamesFr[i] != 'undefined')) {
+// 		allHumanNamesFr.push(el, maleHumanNamesFr[i]);
+// 	}
+// });
+//
+// femaleHumanNamesDe.forEach(function (el, i) {
+// 	if ((maleHumanNamesDe[i] != undefined) && (maleHumanNamesDe[i] != 'undefined')) {
+// 		allHumanNamesDe.push(el, maleHumanNamesDe[i]);
+// 	}
+// });
+//
+// femaleHumanNamesEs.forEach(function (el, i) {
+// 	if ((maleHumanNamesEs[i] != undefined) && (maleHumanNamesEs[i] != 'undefined')) {
+// 		allHumanNamesEs.push(el, maleHumanNamesEs[i]);
+// 	}
+// });
 
 exports.femaleEn = femaleHumanNamesEn;
 exports.maleEn = maleHumanNamesEn;
@@ -89,3 +104,19 @@ exports.allRandomDe = uniqueRandomArray(allHumanNamesDe);
 exports.femaleRandomEs = uniqueRandomArray(femaleHumanNamesEs);
 exports.maleRandomEs = uniqueRandomArray(maleHumanNamesEs);
 exports.allRandomEs = uniqueRandomArray(allHumanNamesEs);
+
+/**
+ * Returns the first English names that matches the provided name.
+ * @param name
+ * @returns {*}
+ */
+var isPersonName = function (name) {
+
+	var matchIndex = allNames.findIndex(function (x, index) {
+		return new RegExp(name, "gi").test(x)
+	})
+
+	return matchIndex != -1;
+}
+
+exports.isPersonName = isPersonName;
