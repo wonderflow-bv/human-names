@@ -1,31 +1,27 @@
-# human-names v1.0.8 [![Build Status](https://travis-ci.org/AlessandroMinoccheri/human-names.svg?branch=master)](https://travis-ci.org/AlessandroMinoccheri/human-names)
+# people-names [![Build Status](https://travis-ci.org/AlessandroMinoccheri/human-names.svg?branch=master)](https://travis-ci.org/AlessandroMinoccheri/human-names)
 
 Get popular human english, italian, french, deutch or spanish names.
-
-To create this repository I have forked this project and make some edit:
-
-https://github.com/sindresorhus/supervillains
-
-Thanks to the author https://github.com/sindresorhus
-
-The name lists are just JSON files and can be used wherever.
-
-*Not accepting PRs for additional names.*
-
 
 ## Install
 
 ```
-$ npm install --save human-names
+$ npm install --save people-names
 ```
 
 
 ## Usage
 
 ```js
-var humanNames = require('human-names');
+var x = require('people-names');
 
-humanNames.femaleRandom();
+
+x.parseNames("Thomas passed the ball to Daniel who kicked it to Maria")
+=> ['Thomas', 'Daniel', 'Maria']
+
+x.isPersonName('Daniel')
+=> true
+
+x.femaleRandom();
 //=> Lucy
 ```
 
@@ -76,10 +72,10 @@ $ npm install --global human-names
 ```
 
 ```
-$ human-names --help
+$ people-names --help
 
   Examples
-    $ human-names
+    $ people-names
     Lucy
 
     $ human-names --all --type male
@@ -92,7 +88,3 @@ $ human-names --help
     --type  Type of name: female|male|all  Default: all
     --lang  lang of name: en|it|fr|de|es  Default: en
 ```
-
-## License
-
-MIT © [Alessandro Minoccheri](http://alessandrominoccheri.com)

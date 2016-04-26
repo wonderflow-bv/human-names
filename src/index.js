@@ -116,7 +116,9 @@ exports.allRandomEs = uniqueRandomArray(allHumanNamesEs);
 var isPersonName = function (name) {
 
     var matchIndex = allNames.findIndex(function (x, index) {
-        return new RegExp(name, "gi").test(x)
+        //console.log(name, x)
+        return name == x
+        //return new RegExp(name, "gi").test(x)
     })
 
     return matchIndex != -1;
@@ -127,11 +129,29 @@ let parseNames = function (text) {
 
     let parsed = compendium.analyse(text)
 
-    // Normalise entity tokens into a single array
     let entities = []
 
+    // Normalise entity tokens into a single array
     parsed.forEach(x => {
         entities = entities.concat(x.entities)
+    })
+
+    // If a token is multiple words, split each subsequent word into a seperate entity
+    let len = entities.length
+    for (let i = 0; i < len; i++) {
+
+        let x = entities[i]
+        let words = x.raw.split(" ");
+
+        for (let j = 0; j < words.length; j++) {
+            entities.push({
+                raw: words[j]
+            })
+        }
+    }
+
+    entities = entities.map(x => {
+        return x.raw.trim()
     })
 
     // Filter entities by known people names
@@ -139,20 +159,9 @@ let parseNames = function (text) {
         return isPersonName(x)
     })
 
-    entities = entities.map(x => {
-        return {
-            raw: x.raw,
-            norm: x.norm
-        }
-    })
-
     printJson(entities)
 
-    if (entities.length > 0) {
-        return entities[0]
-    }
-
-    return ""
+    return entities
 }
 
 function printJson(what) {
