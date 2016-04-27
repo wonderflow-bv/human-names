@@ -1,11 +1,11 @@
 {
   "name": "people-names",
-  "version": "1.0.8",
+  "version": "1.0.14",
   "description": "Get popular human names",
   "license": "MIT",
-  "repository": "dcworldwide/people-names",
+  "repository": "dcworldwide/human-names",
   "bin": {
-    "human-names": "cli.js"
+    "human-names": "lib/cli.js"
   },
   "author": {
     "name": "danijel7",
@@ -19,9 +19,10 @@
     "build": "babel src -d lib && babel tests -d lib",
     "test": "npm run build && babel-node lib/test.js"
   },
+  "main": "lib/index.js",
   "files": [
-    "src/index.js",
-    "src/cli.js",
+    "lib/index.js",
+    "lib/cli.js",
     "data/female-human-names-en.json",
     "data/male-human-names-en.json",
     "data/female-human-names-it.json",
@@ -52,6 +53,7 @@
   ],
   "dependencies": {
     "compendium-js": "0.0.25",
+    "lodash.uniq": "^4.2.1",
     "meow": "^3.0.0",
     "unique-random-array": "^1.0.0"
   },

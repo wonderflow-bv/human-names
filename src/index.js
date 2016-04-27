@@ -1,6 +1,7 @@
 'use strict';
 
 var compendium = require('compendium-js');
+var uniq = require('lodash.uniq');
 
 var uniqueRandomArray = require('unique-random-array');
 var femaleHumanNamesEn = require('../data/female-human-names-en.json');
@@ -113,19 +114,17 @@ exports.allRandomEs = uniqueRandomArray(allHumanNamesEs);
  * @param name
  * @returns {*}
  */
-var isPersonName = function (name) {
+let isPersonName = (name) => {
 
     var matchIndex = allNames.findIndex(function (x, index) {
-        //console.log(name, x)
         return name == x
-        //return new RegExp(name, "gi").test(x)
     })
 
     return matchIndex != -1;
 }
 
 
-let parseNames = function (text) {
+let parseNames = (text) => {
 
     let parsed = compendium.analyse(text)
 
@@ -155,11 +154,11 @@ let parseNames = function (text) {
     })
 
     // Filter entities by known people names
-    entities = entities.filter(x => {
+    entities = uniq(entities.filter(x => {
         return isPersonName(x)
-    })
+    }))
 
-    printJson(entities)
+    // printJson(entities)
 
     return entities
 }
