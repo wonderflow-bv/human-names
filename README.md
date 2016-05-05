@@ -1,6 +1,6 @@
 # people-names [![Build Status](https://travis-ci.org/AlessandroMinoccheri/human-names.svg?branch=master)](https://travis-ci.org/AlessandroMinoccheri/human-names)
 
-Get popular human english, italian, french, deutch or spanish names.
+Human name parser / generator. Supports popular English, Italian, French, Deutch or Spanish names. Missing a name? Submit a PR :)
 
 ## Install
 
