@@ -1,4 +1,4 @@
-# people-names [![Build Status](https://travis-ci.org/AlessandroMinoccheri/human-names.svg?branch=master)](https://travis-ci.org/AlessandroMinoccheri/human-names) [![Coverage Status](https://coveralls.io/repos/github/dcworldwide/human-names/badge.svg?branch=master)](https://coveralls.io/github/dcworldwide/human-names?branch=master)
+# people-names [![Build Status](https://travis-ci.org/dcworldwide/human-names.svg?branch=master)](https://travis-ci.org/AlessandroMinoccheri/human-names) [![Coverage Status](https://coveralls.io/repos/github/dcworldwide/human-names/badge.svg?branch=master)](https://coveralls.io/github/dcworldwide/human-names?branch=master)
 
 Human name parser / generator. Supports popular English, Italian, French, Deutch or Spanish names. Missing a name? Submit a PR :)
 
