@@ -34,10 +34,10 @@ var allHumanNamesDe = (femaleHumanNamesDe).concat(maleHumanNamesDe)
 var allHumanNamesEs = (femaleHumanNamesEs).concat(maleHumanNamesEs)
 
 allNames = allHumanNamesEn
-    .concat(allHumanNamesIt)
-    .concat(allHumanNamesFr)
-    .concat(allHumanNamesDe)
-    .concat(allHumanNamesEs);
+	.concat(allHumanNamesIt)
+	.concat(allHumanNamesFr)
+	.concat(allHumanNamesDe)
+	.concat(allHumanNamesEs);
 
 // femaleHumanNamesEn.forEach(function (el, i) {
 // 	if ((maleHumanNamesEn[i] != undefined) && (maleHumanNamesEn[i] != 'undefined')) {
@@ -116,56 +116,61 @@ exports.allRandomEs = uniqueRandomArray(allHumanNamesEs);
  */
 let isPersonName = (name) => {
 
-    var matchIndex = allNames.findIndex(function (x, index) {
-        return name == x
-    })
+	var matchIndex = allNames.findIndex(function (x, index) {
+		return name.toLowerCase() == x.toLowerCase()
+	})
 
-    return matchIndex != -1;
+	return matchIndex != -1;
 }
 
 
 let parseNames = (text) => {
 
-    let parsed = compendium.analyse(text)
+	let parsed = compendium.analyse(text)
 
-    let entities = []
+	let entities = []
 
-    // Normalise entity tokens into a single array
-    parsed.forEach(x => {
-        entities = entities.concat(x.entities)
-    })
+	// Normalise entity tokens into a single array
+	parsed.forEach(x => {
+		entities = entities.concat(x.entities)
+	})
 
-    // If a token is multiple words, split each subsequent word into a seperate entity
-    let len = entities.length
-    for (let i = 0; i < len; i++) {
+	// If a token is multiple words, split each subsequent word into a seperate entity
+	let len = entities.length
+	for (let i = 0; i < len; i++) {
 
-        let x = entities[i]
-        let words = x.raw.split(" ");
+		let x = entities[i]
+		let words = x.raw.split(" ");
 
-        for (let j = 0; j < words.length; j++) {
-            entities.push({
-                raw: words[j]
-            })
-        }
-    }
+		for (let j = 0; j < words.length; j++) {
+			entities.push({
+				raw: words[j]
+			})
+		}
+	}
 
-    entities = entities.map(x => {
-        return x.raw.trim()
-    })
+	entities = entities.map(x => {
+		return toTitleCase(x.raw.trim())
+	})
 
-    // Filter entities by known people names
-    entities = uniq(entities.filter(x => {
-        return isPersonName(x)
-    }))
+	// Filter entities by known people names
+	entities = uniq(entities.filter(x => {
+		return isPersonName(x)
+	}))
 
-    // printJson(entities)
+	// printJson(entities)
 
-    return entities
+	return entities
 }
 
 function printJson(what) {
-    return console.log(JSON.stringify(what, null, '  '));
+	return console.log(JSON.stringify(what, null, '  '));
 };
+
+function toTitleCase(str)
+{
+	return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
 
 exports.isPersonName = isPersonName;
 exports.parseNames = parseNames;
