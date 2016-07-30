@@ -56,28 +56,34 @@ var humanNames = require('./');
 // });
 
 test(function (t) {
-    t.assert(humanNames.isPersonName("Daniel") == true);
-    t.assert(humanNames.isPersonName("Sam") == true);
-    t.assert(humanNames.isPersonName("Corey") == true);
-    t.assert(humanNames.isPersonName("Suzanna") == true);
-    t.assert(humanNames.isPersonName("Shirley") == true);
-    // t.assert(humanNames.isPersonName("Marko") == true);
+	t.assert(humanNames.isPersonName("Daniel") == true);
+	t.assert(humanNames.isPersonName("Sam") == true);
+	t.assert(humanNames.isPersonName("Corey") == true);
+	t.assert(humanNames.isPersonName("Suzanna") == true);
+	t.assert(humanNames.isPersonName("Shirley") == true);
+	t.assert(humanNames.isPersonName("Jane") == true);
+	t.assert(humanNames.isPersonName("JANE") == true);
+	// t.assert(humanNames.isPersonName("Marko") == true);
 });
 
 test(function (t) {
 
-    let test1 = humanNames.parseNames("☎ ☎ Shirley TEL ☎ ☎ \n\n☎ ☎ 860 995 3542 ☎ ☎ \n** TEXT MESSAGE ONLY **\nHi, honey. Just send your address if you want me come to you now.\n\nOutcall special:\n\n$160 For 1 hour.\n$320 For 3 hour.\n$600 For Overnight.\n\n** NO BLOCKED CALLS ** \n** SERIOUS INQUIRIES ONLY ** \n\n** NO RAPIST **")
-    console.log(test1)
-    t.assert(test1.indexOf("Shirley") != -1);
+	let test1 = humanNames.parseNames("☎ ☎ Shirley TEL ☎ ☎ \n\n☎ ☎ 860 995 3542 ☎ ☎ \n** TEXT MESSAGE ONLY **\nHi, honey. Just send your address if you want me come to you now.\n\nOutcall special:\n\n$160 For 1 hour.\n$320 For 3 hour.\n$600 For Overnight.\n\n** NO BLOCKED CALLS ** \n** SERIOUS INQUIRIES ONLY ** \n\n** NO RAPIST **")
+	console.log(test1)
+	t.assert(test1.indexOf("Shirley") != -1);
 
-    let test2 = humanNames.parseNames("Swing dancing special Jasmine wished Michael a happy birthday. Thanks Jasmine")
-    console.log(test2)
-    t.assert(test2.indexOf("Jasmine") != -1);
-    t.assert(test2.indexOf("Michael") != -1);
+	let test2 = humanNames.parseNames("Swing dancing special Jasmine wished Michael a happy birthday. Thanks Jasmine")
+	console.log(test2)
+	t.assert(test2.indexOf("Jasmine") != -1);
+	t.assert(test2.indexOf("Michael") != -1);
 
-    let test3 = humanNames.parseNames("Mario felt left out ever since he peaked early")
-    console.log(test3)
-    t.assert(test3.indexOf("Mario") != -1);
+	let test3 = humanNames.parseNames("Mario felt left out ever since he peaked early")
+	console.log(test3)
+	t.assert(test3.indexOf("Mario") != -1);
 
-    t.end();
+	let test4 = humanNames.parseNames("JANE from Maine!")
+	console.log(test4)
+	t.assert(test4.indexOf("Jane") != -1);
+
+	t.end();
 });
