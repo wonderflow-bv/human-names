@@ -88,3 +88,7 @@ $ people-names --help
     --type  Type of name: female|male|all  Default: all
     --lang  lang of name: en|it|fr|de|es  Default: en
 ```
+
+# TODO
+
+- [ ] include dutch name - e.g. from https://en.wikipedia.org/wiki/Category:Dutch_masculine_given_names and https://en.wikipedia.org/wiki/Category:Dutch_feminine_given_names
