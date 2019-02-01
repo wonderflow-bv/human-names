@@ -32,7 +32,9 @@
     "data/female-human-names-de.json",
     "data/male-human-names-de.json",
     "data/female-human-names-es.json",
-    "data/male-human-names-es.json"
+    "data/male-human-names-es.json",
+    "data/female-human-names-nl.json",
+    "data/male-human-names-nl.json"
   ],
   "keywords": [
     "cli-app",
