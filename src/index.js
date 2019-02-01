@@ -144,7 +144,7 @@ let parseNames = (text) => {
 	let entities = nlp(text)
 		.terms()
 		.data()
-		.map(e => e.tags.some(t => tagsForEntity.includes(t)) ? e.text : null)
+		.map(e => e.tags.some(t => tagsForEntity.includes(t)) ? e.normal : null)
 		.filter(Boolean)
 
 	entities = entities.map(x => {
